@@ -1,0 +1,63 @@
+<html>
+<meta charset="utf-8">
+<title> bilyard Game</title>
+<body>
+<canvas id="myCanvas" width="847" height="440" style="background-color:#000000">Your browser dosen,t support HTML5!
+</canvas>
+</body>
+<script type="text/javascript">
+var canvas=document.getElementById("myCanvas");
+var ctx=canvas.getContext("2d");
+var r=15;
+var balls=[];
+
+function initBall(){
+	var parenBall={
+	position:{x:200,y:200},
+	r:r,
+	color:"#fff"
+    };
+    var firstBall={
+    position:{x:550,y:200},
+	r:r,
+	color:randomColor()
+    };
+
+for (var j = 1; j <5; j++){
+	for (var k = 0; k<j+1; k++){
+		var ball={
+			position:{x:firstBall.position.x+j*Math.sqrt(3)*r,y:firstBall.position.y-j*r+2*k*r},
+	r:r,
+	color:randomColor()
+};
+	balls.push(ball);
+}
+}
+balls.push(firstBall);
+balls.push(parenBall);
+}
+function draw(){
+	for (i in balls) {
+		ctx.fillStyle=balls[i].color;
+		ctx.beginPath();
+		ctx.arc(balls[i].position.x,balls[i].position.y,balls[i].r,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
+
+	}
+}
+//随机产生颜色
+function randomColor(){
+	var arrHex=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+	var strHex="#";
+	var index;
+	for (var i = 0; i < 6; i++) {
+		index=Math.round(Math.random()*15);
+		strHex+=arrHex[index];
+	}
+	return strHex;
+}
+initBall();
+draw();
+</script>
+</html>
