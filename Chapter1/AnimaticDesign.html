@@ -1,0 +1,45 @@
+<html>
+<meta charset="utf-8">
+<title>Animation Design</title>
+<body>
+<canvas id="myCnavas" width="300" height="300" style="border:1px solid #c3c3c3;"></canvas>
+<canvas id="myCnavas2" width="300" height="300" style="border:1px solid #c3c3c3;"></canvas>
+</body>
+<script type="text/javascript" src="js/jscex.min.js"></script>
+<script type="text/javascript">
+//canvas 1 adette 
+var c=document.getElementById("myCnavas");
+var ctx=c.getContext("2d");
+ctx.moveTo(60,60);
+ctx.lineTo(240, 200);
+ctx.lineTo(60,200);
+ctx.lineTo(60,60);
+ctx.stroke();
+//canvas2 jeryanini korsetkende 
+var c2=document.getElementById("myCnavas2");
+var ctx2=c2.getContext("2d");
+var x=150;
+var y=150;
+var r=100;
+var drawAsync=eval(Jscex.compile("async",function(){
+	ctx2.moveTo(x-r,y); //x,y noqtini merkez qilip
+	//asti yirim chember 
+	for (var i = x-r; i < x+r+1; i++){
+		$await(Jscex.Async.sleep(10));
+	var tempY=Math.pow(r*r-(x-i)*(x-i),1/2); // y=r2-(x*i)2  ni yiltiz achqangha
+	ctx2.lineTo(i,y+tempY);
+	ctx2.stroke();
+}
+ctx2.moveTo(x-r,y);
+// usti yirim chember
+for (var i = x-r; i < x+r+1; i++) {
+	$await(Jscex.Async.sleep(10));
+	var tempY=Math.pow(r*r-(x-i)*(x-i),1/2);
+	ctx2.lineTo(i,y-tempY);
+	ctx2.stroke();
+    }
+
+}));
+drawAsync().start();
+</script>
+</html>
