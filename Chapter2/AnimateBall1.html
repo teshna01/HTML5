@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Tiz siqiliq tekshi heriket</title>
+</head>
+<body>
+	<script src="../js/jscex.jscexRequire.min.js" type="text/javascript"></script>
+<canvas id="myCanvas" width="600" height="500" > Tor korgungiz Html5 ni qollimaydu
+</canvas>
+<script type="text/javascript">
+var canvas=document.getElementById("myCanvas");
+var ctx=canvas.getContext("2d");
+var ball={
+	position:{x:10,y:10},
+	r:15,
+	vx:190,
+	vy:110
+};
+var cyc=10;
+var moveAsync=eval(Jscex.compile("async",function(){
+	while(true){
+			ctx.fillStyle="rgba(0,0,0,3)";
+		ctx.fillRect(0,0,canvas.width,canvas.height);
+		ctx.fillStyle="#fff";
+		ctx.beginPath();
+		ctx.arc(ball.position.x,ball.position.y,ball.r,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
+		ball.position.x+=ball.vx*cyc/1000;
+		ball.position.y+=ball.vy*cyc/1000;
+		$await(Jscex.Async.sleep(cyc));
+}	
+}))
+moveAsync().start();
+</script>
+</body>
+</html>
